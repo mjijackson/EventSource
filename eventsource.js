@@ -133,13 +133,14 @@
   }
 
   function EventSource(url, options) {
+    options = options || {};
     url = String(url);
 
-    var withCredentials = Boolean(xhr2 && options && options.withCredentials);
-    var initialRetry = getDuration(options ? options.retry : NaN, 1000);
-    var retryLimit = getDuration(options ? options.retryLimit : NaN, 300000);
-    var heartbeatTimeout = getDuration(options ? options.heartbeatTimeout : NaN, 45000);
-    var lastEventId = (options && options.lastEventId && String(options.lastEventId)) || "";
+    var withCredentials = Boolean(xhr2 && options.withCredentials);
+    var initialRetry = getDuration(options.retry, 1000);
+    var retryLimit = getDuration(options.retryLimit, 300000);
+    var heartbeatTimeout = getDuration(options.heartbeatTimeout, 45000);
+    var lastEventId = String(options.lastEventId || "");
     var that = this;
     var retry = initialRetry;
     var wasActivity = false;
@@ -154,8 +155,6 @@
     var wasCR = false;
     var progressTimeout = 0;
     var wasAct = false;
-
-    options = null;
 
     function close() {
       currentState = CLOSED;
