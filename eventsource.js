@@ -142,6 +142,7 @@
     var heartbeatTimeout = getDuration(options.heartbeatTimeout, 45000);
     var lastEventId = String(options.lastEventId || "");
     var method = String(options.method || "GET").toUpperCase();
+    var body = options.body || null;
     var that = this;
     var retry = initialRetry;
     var wasActivity = false;
@@ -378,7 +379,7 @@
         //xhr.setRequestHeader("Last-Event-ID", lastEventId);
       }
 
-      xhr.send(null);
+      xhr.send(body);
     }
 
     EventTarget.call(this);
