@@ -141,6 +141,7 @@
     var retryLimit = getDuration(options.retryLimit, 300000);
     var heartbeatTimeout = getDuration(options.heartbeatTimeout, 45000);
     var lastEventId = String(options.lastEventId || "");
+    var method = String(options.method || "GET").toUpperCase();
     var that = this;
     var retry = initialRetry;
     var wasActivity = false;
@@ -360,7 +361,7 @@
       responseBuffer.length = 0;
       wasCR = false;
 
-      xhr.open("GET", url + ((url.indexOf("?", 0) === -1 ? "?" : "&") + "lastEventId=" + encodeURIComponent(lastEventId) + "&r=" + String(Math.random() + 1).slice(2)), true);
+      xhr.open(method, url + ((url.indexOf("?", 0) === -1 ? "?" : "&") + "lastEventId=" + encodeURIComponent(lastEventId) + "&r=" + String(Math.random() + 1).slice(2)), true);
 
       // withCredentials should be setted after "open" for Safari and Chrome (< 19 ?)
       xhr.withCredentials = withCredentials;
