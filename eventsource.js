@@ -356,7 +356,7 @@
       currentState = CONNECTING;
       dataBuffer.length = 0;
       eventTypeBuffer = "";
-      lastEventIdBuffer = lastEventId;//resets to last successful
+      lastEventIdBuffer = lastEventId; // reset to last successful
       responseBuffer.length = 0;
       wasCR = false;
 
